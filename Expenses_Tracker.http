@@ -1,6 +1,0 @@
-@Expenses_Tracker_HostAddress = http://localhost:5196
-
-GET {{Expenses_Tracker_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
