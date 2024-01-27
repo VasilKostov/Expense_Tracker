@@ -1,50 +1,25 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
-#For more information, please see https://aka.ms/containercompat
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
 
-#FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-1809 AS base
-#WORKDIR /app
-#EXPOSE 8080
-#
-#FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
-#ARG BUILD_CONFIGURATION=Release
-#WORKDIR /src
-#COPY ["AuthenticationService/AuthenticationService.csproj", "AuthenticationService/"]
-#RUN dotnet restore "./AuthenticationService/./AuthenticationService.csproj"
-#COPY . .
-#WORKDIR "/src/AuthenticationService"
-#RUN dotnet build "./AuthenticationService.csproj" -c %BUILD_CONFIGURATION% -o /app/build
-#
-#FROM build AS publish
-#ARG BUILD_CONFIGURATION=Release
-#RUN dotnet publish "./AuthenticationService.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
-#
-#FROM base AS final
-#WORKDIR /app
-#COPY --from=publish /app/publish .
-#ENTRYPOINT ["dotnet", "AuthenticationService.dll"]
-
-# Stage 1: Build the application
-FROM mcr.microsoft.com/dotnet/sdk5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["AuthenticationService/AuthenticationService.csproj", "AuthenticationService/"]
-RUN dotnet restore "./AuthenticationService/AuthenticationService.csproj"
+RUN dotnet restore "./AuthenticationService/./AuthenticationService.csproj"
 COPY . .
 WORKDIR "/src/AuthenticationService"
-RUN dotnet publish "./AuthenticationService.csproj" -c Release -o /app/publish
+RUN dotnet build "./AuthenticationService.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# Stage 2: Create the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./AuthenticationService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/publish .
-EXPOSE 8080
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "AuthenticationService.dll"]
-
-# Stage 3: SQL Server container
-FROM mcr.microsoft.com/mssql/server:2019-latest AS sqlserver
-ENV SA_PASSWORD=Exp3nse_Tracker024
-ENV ACCEPT_EULA=Y
-ENV MSSQL_PID=Express
-WORKDIR /src
-COPY ["YourSqlScriptsFolder/", "/docker-entrypoint-initdb.d/"]
