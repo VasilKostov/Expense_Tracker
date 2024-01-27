@@ -1,0 +1,30 @@
+version: '3.4'
+
+networks:
+  backend:
+
+
+services:
+    authenticationdb:
+        container_name: auth-db
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=Exp3nse_Tracker024
+        networks:
+            - backend
+        ports:
+            - 8001:1433
+    authenticationservice:
+        image: ${DOCKER_REGISTRY-}authenticationservice
+        build:
+            context: .
+            dockerfile: AuthenticationService\Dockerfile
+        networks:
+            - backend
+        ports:
+            - 8002:8080
+        environment:
+            - DB_HOST=authenticationdb
+            - DB_NAME=authentication
+            - DB_SA_PASSWORD=Exp3nse_Tracker024
