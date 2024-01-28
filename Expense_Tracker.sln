@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "APIGateway\APIGateway.csproj", "{83E60A98-86A9-4790-A8CB-203CC8901F72}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationService", "AuthenticationService\AuthenticationService.csproj", "{816E5B0A-5340-4824-AF0E-630AAFF670BB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{83E60A98-86A9-4790-A8CB-203CC8901F72} = {83E60A98-86A9-4790-A8CB-203CC8901F72}
+	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B81DF04F-7B1A-441F-AC55-A0652435E21E}"
 EndProject

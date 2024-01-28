@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuthenticationService.Models;
 
-[Table("user", Schema = "dbo")]
 public class Users
 {
     [Key]
