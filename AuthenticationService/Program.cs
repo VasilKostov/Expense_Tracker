@@ -16,7 +16,7 @@ namespace AuthenticationService
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<AuthenticationDbContext>(opt => opt.UseSqlServer("Data Source=localhost,8001;Initial Catalog=Authentication;User Id=sa;Password=Exp3nse_Tracker024",
+            builder.Services.AddDbContext<AuthenticationDbContext>(opt => opt.UseSqlServer("Data Source=localhost,8001;Initial Catalog=Authentication;User Id=sa;Password=Exp3nse_Tracker024;Encrypt=True;TrustServerCertificate=True;",
                 b => b.MigrationsAssembly("AuthenticationService")));
             var app = builder.Build();
 

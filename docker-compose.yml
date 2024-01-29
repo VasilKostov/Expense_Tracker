@@ -19,9 +19,9 @@ services:
         #volume?
     authenticationservice:
         image: ${DOCKER_REGISTRY-}authenticationservice
-        build: ./AuthenticationService
-            # context: .
-            # dockerfile: AuthenticationService/Dockerfile
+        build:
+            context: .
+            dockerfile: AuthenticationService/Dockerfile
         # networks:
         #     - backend
         ports:

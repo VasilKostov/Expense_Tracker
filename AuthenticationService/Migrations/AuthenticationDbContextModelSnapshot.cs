@@ -46,7 +46,7 @@ namespace AuthenticationService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("user", "dbo");
                 });
 #pragma warning restore 612, 618
         }
