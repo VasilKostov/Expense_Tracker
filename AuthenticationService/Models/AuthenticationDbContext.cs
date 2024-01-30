@@ -30,5 +30,5 @@ public class AuthenticationDbContext : DbContext
     //    if (!options.IsConfigured)
     //        options.UseSqlServer("Data Source=localhost,8001;Initial Catalog=Authentication;User Id=sa;Password=Exp3nse_Tracker024;Encrypt=True;TrustServerCertificate=True;", b => b.MigrationsAssembly("AuthenticationService"));
     //}
-    public DbSet<Users> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 }

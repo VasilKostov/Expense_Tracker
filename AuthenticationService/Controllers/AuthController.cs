@@ -1,5 +1,6 @@
 ﻿using AuthenticationService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthenticationService.Controllers;
 
@@ -14,8 +15,15 @@ public class AuthController : Controller
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Users>> GetUsers()
+    public async Task<ActionResult<IEnumerable<User>>> GetUsers()
     {
-        return _authDbContext.Users;
+        return await _authDbContext.Users.ToListAsync();
+    }
+
+
+    public ActionResult<User> GetUser(string username, string password)
+    {
+        //hash the pass and check for some security bridge
+        return _authDbContext.Users.Where(u=>u.UserName == username && u.Password == password).FirstOrDefault();
     }
 }
