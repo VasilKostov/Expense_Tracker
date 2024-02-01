@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AuthenticationService.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace AuthenticationService.Models;
+namespace AuthenticationService.Data;
 
 public class AuthenticationDbContext : DbContext
 {

@@ -1,4 +1,4 @@
-using AuthenticationService.Models;
+using AuthenticationService.Data;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 

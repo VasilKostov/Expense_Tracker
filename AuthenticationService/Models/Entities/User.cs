@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AuthenticationService.Models;
+namespace AuthenticationService.Models.Entities;
 
 public class User
 {
@@ -10,6 +10,7 @@ public class User
     public int Id { get; set; }
     public int UserId { get; set; }
     public string UserName { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
+    public bool IsLocked { get; set; }
     public DateTime CreatedOn { get; set; }
 }

@@ -1,4 +1,6 @@
-﻿using AuthenticationService.Models;
+﻿using AuthenticationService.Data;
+using AuthenticationService.Models;
+using AuthenticationService.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +26,6 @@ public class AuthController : Controller
     public ActionResult<User> GetUser(string username, string password)
     {
         //hash the pass and check for some security bridge
-        return _authDbContext.Users.Where(u=>u.UserName == username && u.Password == password).FirstOrDefault();
+        return _authDbContext.Users.Where(u=>u.UserName == username && u.PasswordHash == password).FirstOrDefault();
     }
 }
