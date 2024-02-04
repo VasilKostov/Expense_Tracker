@@ -1,5 +1,4 @@
 ﻿using AuthenticationService.Data;
-using AuthenticationService.Models;
 using AuthenticationService.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +20,6 @@ public class AuthController : Controller
     {
         return await _authDbContext.Users.ToListAsync();
     }
-
 
     public ActionResult<User> GetUser(string username, string password)
     {
