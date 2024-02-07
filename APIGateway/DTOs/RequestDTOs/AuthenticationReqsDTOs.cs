@@ -1,6 +1,6 @@
 ﻿namespace APIGateway.DTOs.RequestDTOs
 {
-    public class AuthenticationDTOs
+    public class AuthenticationReqsDTOs
     {
     }
 }
