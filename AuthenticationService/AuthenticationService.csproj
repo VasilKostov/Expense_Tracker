@@ -27,6 +27,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Protobuf Include="Protos\gateway.proto" GrpcServices="Server" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\APIGateway\APIGateway.csproj" />
 	</ItemGroup>
 
