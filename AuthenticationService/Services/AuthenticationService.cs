@@ -1,20 +1,24 @@
 ﻿using AuthenticationService.Models.Entities;
+using Google.Protobuf.WellKnownTypes;
+using GrpcAPIGatewayClient;
 
 namespace AuthenticationService.Services;
 
 public class AuthenticationService : IAuthenticationService
 {
-    public List<User> GetUsers()
+    public GetUsersRes GetUsers()
     {
-        return
-        [
-            new User 
+        var users = new GetUsersRes();
+       
+        users.Users.Add(
+            new GrpcAPIGatewayClient.User
             {
                 UserId = 1,
                 UserName = "Test",
                 PasswordHash = Guid.NewGuid().ToString(),
-                CreatedOn = DateTime.Now
-            } 
-        ];
+                CreatedOn = Timestamp.FromDateTime(DateTime.UtcNow)
+            });
+
+        return users;
     }
 }

@@ -1,4 +1,7 @@
-﻿using Grpc.Core;
+﻿using APIGateway.Services;
+using Grpc.Core;
+using Grpc.Net.Client;
+using GrpcAPIGatewayClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Channels;
@@ -10,13 +13,17 @@ namespace APIGateway.Controllers;
 public class AuthenticationController : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetUsers()
+    public async Task<GetUsersRes> GetUsers()
     {
-        Channel channel = new Channel("localhost:50052", ChannelCredentials.Insecure);
-        var client = new AuthenticationService.AuthenticationServiceClient(channel);
+        using var channel = GrpcChannel.ForAddress("https://localhost:7042");
+        var client = new Authentication.AuthenticationClient(channel);
 
-        var response = await client.GetUsersAsync(new GetUsersRequest());
+        return await client.GetUsersAsync(new GetUsersReq());
 
-        return response.Users.ToList();
+        //var reply = await client.SayHelloAsync(
+        //                  new HelloRequest { Name = "GreeterClient" });
+        //Console.WriteLine("Greeting: " + reply.Message);
+        //Console.WriteLine("Press any key to exit...");
+        //Console.ReadKey();
     }
 }
