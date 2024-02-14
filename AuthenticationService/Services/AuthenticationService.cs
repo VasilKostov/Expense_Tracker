@@ -1,5 +1,4 @@
-﻿using AuthenticationService.Models.Entities;
-using Google.Protobuf.WellKnownTypes;
+﻿using Google.Protobuf.WellKnownTypes;
 using GrpcAPIGatewayClient;
 
 namespace AuthenticationService.Services;

@@ -1,7 +1,5 @@
-﻿using AuthenticationService.Models.Entities;
+﻿using GrpcAPIGatewayClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace AuthenticationService.Data;
 

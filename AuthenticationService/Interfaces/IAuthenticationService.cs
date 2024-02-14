@@ -1,5 +1,4 @@
-﻿using AuthenticationService.Models.Entities;
-using GrpcAPIGatewayClient;
+﻿using GrpcAPIGatewayClient;
 
 namespace AuthenticationService.Services;
 

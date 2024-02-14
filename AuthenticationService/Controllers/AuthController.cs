@@ -1,5 +1,5 @@
 ﻿using AuthenticationService.Data;
-using AuthenticationService.Models.Entities;
+using GrpcAPIGatewayClient;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

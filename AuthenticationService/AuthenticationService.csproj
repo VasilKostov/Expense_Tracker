@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Include="Protos\gateway.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\gateway.proto" GrpcServices="GrpcAPIGatewayServer" />
 	</ItemGroup>
 
 	<ItemGroup>
