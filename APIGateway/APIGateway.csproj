@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>79facb8a-e0bf-48a7-9c32-9564f015d3d7</UserSecretsId>
-		<DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>
 

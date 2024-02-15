@@ -12,7 +12,7 @@ namespace APIGateway.Controllers;
 [ApiController]
 public class AuthenticationController : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("getUsers")]
     public async Task<GetUsersRes> GetUsers()
     {
         using var channel = GrpcChannel.ForAddress("https://localhost:7042");
