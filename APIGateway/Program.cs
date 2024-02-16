@@ -8,10 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 //    .AddEnvironmentVariables();
 
 builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
-
+builder.Services.AddControllers();
 //builder.Services.AddOcelot(builder.Configuration);
 
 var app = builder.Build();
+app.MapControllers();
 
 //await app.UseOcelot();
 
