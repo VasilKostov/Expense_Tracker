@@ -21,9 +21,9 @@ public class AuthController : Controller
         return await _authDbContext.Users.ToListAsync();
     }
 
-    public ActionResult<User> GetUser(string username, string password)
-    {
-        //hash the pass and check for some security bridge
-        return _authDbContext.Users.Where(u=>u.UserName == username && u.PasswordHash == password).FirstOrDefault();
-    }
+    //public ActionResult<User> GetUser(string username, string password)
+    //{
+    //    //hash the pass and check for some security bridge
+    //    return _authDbContext.Users.Where(u=>u.UserName == username && u.PasswordHash == password).FirstOrDefault();
+    //}
 }

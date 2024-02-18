@@ -10,8 +10,10 @@ namespace APIGateway.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AuthenticationController : ControllerBase
+public class AuthenticationController : Controller
 {
+    public AuthenticationController() { }
+
     [HttpGet("getUsers")]
     public async Task<GetUsersRes> GetUsers()
     {
