@@ -26,7 +26,6 @@ services:
             - backend
         ports:
             - 8002:8080
-            - 8003:8081
         environment:
             - DB_HOST=authenticationdb
             - DB_NAME=authentication
@@ -39,5 +38,4 @@ services:
         networks:
             - backend
         ports:
-            - 8004:8082
-            - 8005:8083
+            - 8003:8081

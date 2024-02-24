@@ -1,5 +1,4 @@
-using APIGateway.Interfaces;
-using APIGateway.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
