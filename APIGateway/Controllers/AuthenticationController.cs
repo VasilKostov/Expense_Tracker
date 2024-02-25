@@ -17,7 +17,7 @@ public class AuthenticationController : Controller
     [HttpGet("getUsers")]
     public async Task<GetUsersRes> GetUsers()
     {
-        using var channel = GrpcChannel.ForAddress("https://localhost:7042");
+        using var channel = GrpcChannel.ForAddress("http://localhost:8080");
         var client = new Authentication.AuthenticationClient(channel);
 
         return await client.GetUsersAsync(new GetUsersReq());
