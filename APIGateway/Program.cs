@@ -1,9 +1,12 @@
 
 
+using APIGateway.Singletons;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.Configure<Configuration>(builder.Configuration.GetSection("Configuration"));
 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 //builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
