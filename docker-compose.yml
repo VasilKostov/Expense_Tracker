@@ -5,31 +5,18 @@ networks:
 
 
 services:
-    authenticationdb:
-        container_name: auth-dbs
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        environment:
-            - DB_URL=Data Source=localhost,8001;Initial Catalog=Authentication;User Id=sa;Password=Exp3nse_Tracker024
-            - ACCEPT_EULA=Y
-            - SA_PASSWORD=Exp3nse_Tracker024
-        networks:
-            - backend
-        ports:
-            - 8001:1433
-        #volume?
-    authenticationservice:
-        image: ${DOCKER_REGISTRY-}authenticationservice
-        build:
-            context: .
-            dockerfile: AuthenticationService/Dockerfile
-        networks:
-            - backend
-        ports:
-            - 8002:8080
-        environment:
-            - DB_HOST=authenticationdb
-            - DB_NAME=authentication
-            - DB_SA_PASSWORD=Exp3nse_Tracker024
+    # authenticationdb:
+    #     container_name: auth-dbs
+    #     image: mcr.microsoft.com/mssql/server:2019-latest
+    #     environment:
+    #         - DB_URL=Data Source=localhost,8001;Initial Catalog=Authentication;User Id=sa;Password=Exp3nse_Tracker024
+    #         - ACCEPT_EULA=Y
+    #         - SA_PASSWORD=Exp3nse_Tracker024
+    #     networks:
+    #         - backend
+    #     ports:
+    #         - 8001:1433
+    #     #volume?
     apigateway:
         image: ${DOCKER_REGISTRY-}apigateway
         build:
@@ -38,4 +25,17 @@ services:
         networks:
             - backend
         ports:
-            - 8003:8081
+            - 8002:8080
+    authenticationservice:
+        image: ${DOCKER_REGISTRY-}authenticationservice
+        build:
+            context: .
+            dockerfile: AuthenticationService/Dockerfile
+        networks:
+            - backend
+        ports:
+            - 8003:8082
+        # environment:
+        #     - DB_HOST=authenticationdb
+        #     - DB_NAME=authentication
+        #     - DB_SA_PASSWORD=Exp3nse_Tracker024

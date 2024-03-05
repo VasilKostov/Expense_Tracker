@@ -1,8 +1,16 @@
-
-
 using APIGateway.Singletons;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseKestrel(options =>
+{
+    options.ConfigureHttpsDefaults(httpsOptions =>
+    {
+        httpsOptions.AllowAnyClientCertificate();
+    });
+});
 
 builder.Services.Configure<Configuration>(builder.Configuration.GetSection("Configuration"));
 
@@ -21,6 +29,8 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseRouting();
 
 app.MapControllers();
 

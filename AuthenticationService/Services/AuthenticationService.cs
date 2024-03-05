@@ -1,23 +1,16 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using GrpcAPIGatewayClient;
+﻿using Grpc.Core;
+using GrpcAPIGatewayServer;
 
 namespace AuthenticationService.Services;
 
-public class AuthenticationService : IAuthenticationService
+public class AuthenticationService : Authentication.AuthenticationBase
 {
-    public GetUsersRes GetUsers()
+    public AuthenticationService()
     {
-        var users = new GetUsersRes();
-       
-        users.Users.Add(
-            new GrpcAPIGatewayClient.User
-            {
-                UserId = 1,
-                UserName = "Test",
-                PasswordHash = Guid.NewGuid().ToString(),
-                CreatedOn = Timestamp.FromDateTime(DateTime.UtcNow)
-            });
+    }
 
-        return users;
+    public override Task<GetUsersRes> GetUsers(GetUsersReq req, ServerCallContext context)
+    {
+        return Task.FromResult(new GetUsersRes());
     }
 }
