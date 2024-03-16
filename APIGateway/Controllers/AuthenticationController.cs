@@ -1,4 +1,5 @@
-﻿using APIGateway.Services;
+﻿using APIGateway.Interfaces;
+using APIGateway.Services;
 using Grpc.Core;
 using Grpc.Net.Client;
 using GrpcAPIGatewayClient;
@@ -12,16 +13,18 @@ namespace APIGateway.Controllers;
 [ApiController]
 public class AuthenticationController : Controller
 {
-    public AuthenticationController() { }
+    private readonly IAuthenticationService _authService;
+    public AuthenticationController(IAuthenticationService authService) 
+    {
+        _authService = authService;
+    }
 
     [HttpGet("getUsers")]
     public async Task<GetUsersRes> GetUsers()
     {
-        var channel = GrpcChannel.ForAddress("http://localhost:8081");
-        var client = new Authentication.AuthenticationClient(channel);
 
-        return await client.GetUsersAsync(new GetUsersReq());
-
+        var res = await _authService.GetUsers();
+        return res;
         //var reply = await client.SayHelloAsync(
         //                  new HelloRequest { Name = "GreeterClient" });
         //Console.WriteLine("Greeting: " + reply.Message);

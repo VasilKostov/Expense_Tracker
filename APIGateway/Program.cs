@@ -1,14 +1,25 @@
+using APIGateway.Interfaces;
+using APIGateway.Services;
 using APIGateway.Singletons;
+using GrpcAPIGatewayClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.WebHost.UseKestrel(options =>
+//{
+//    options.ConfigureHttpsDefaults(httpsOptions =>
+//    {
+//        httpsOptions.AllowAnyClientCertificate();
+//    });
+//});
+
 builder.WebHost.UseKestrel(options =>
 {
-    options.ConfigureHttpsDefaults(httpsOptions =>
+    options.ListenAnyIP(8080, configure =>
     {
-        httpsOptions.AllowAnyClientCertificate();
+        configure.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
     });
 });
 
@@ -16,6 +27,14 @@ builder.Services.Configure<Configuration>(builder.Configuration.GetSection("Conf
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddGrpc();
+builder.Services
+    .AddGrpcClient<Authentication.AuthenticationClient>((services, options) =>
+    {
+        options.Address = new Uri("http://localhost:8003");
+    });
+builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
 
 //builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
 //    .AddJsonFile("ocelo.json", optional: false, reloadOnChange: true)

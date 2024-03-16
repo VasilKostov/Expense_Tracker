@@ -1,7 +1,7 @@
 version: '3.4'
 
-networks:
-  backend:
+# networks:
+#   backend:
 
 
 services:
@@ -22,8 +22,8 @@ services:
         build:
             context: .
             dockerfile: APIGateway/Dockerfile
-        networks:
-            - backend
+        # networks:
+        #     - backend
         ports:
             - 8002:8080
     authenticationservice:
@@ -31,8 +31,8 @@ services:
         build:
             context: .
             dockerfile: AuthenticationService/Dockerfile
-        networks:
-            - backend
+        # networks:
+        #     - backend
         ports:
             - 8003:8082
         # environment:
